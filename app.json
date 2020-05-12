@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "books-library-rn",
-    "slug": "books-library-rn",
+    "name": "books-library",
+    "slug": "books-library",
     "platforms": [
       "ios",
       "android",
@@ -22,7 +22,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": false
+    },
+    "android": {},
+    "description": ""
   }
 }
