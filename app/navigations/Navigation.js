@@ -2,10 +2,10 @@ import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Bookshelf from '../screens/Bookshelf'
-import Explore from '../screens/Explore'
-import AddBook from '../screens/AddBook'
-import Settings from '../screens/Settings'
+import BookshelfStack from '../navigations/BookshelfStack'
+import ExploreStack from '../navigations/ExploreStack'
+import AddBookStack from '../navigations/AddBookStack'
+import AccountStack from './AccountStack'
 
 const Tab = createBottomTabNavigator();
 
@@ -15,23 +15,23 @@ export default function Navigation() {
             <Tab.Navigator>
                 <Tab.Screen
                     name="bookshelf"
-                    component={Bookshelf}
+                    component={BookshelfStack}
                     options={{ title: "Colección" }}
                 />
                 <Tab.Screen
                     name="explore"
-                    component={Explore}
+                    component={ExploreStack}
                     options={{ title: "Explorar" }}
                 />
                 <Tab.Screen
                     name="add-book"
-                    component={AddBook}
+                    component={AddBookStack}
                     options={{ title: "Añadir" }}
                 />
                 <Tab.Screen
-                    name="settings"
-                    component={Settings}
-                    options={{ title: "Ajustes" }}
+                    name="account"
+                    component={AccountStack}
+                    options={{ title: "Cuenta" }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
