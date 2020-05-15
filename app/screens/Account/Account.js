@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as firebase from "firebase";
 
-import UserGuest from "./UserGuest";
+import UserGuest from "./UserGuest/UserGuest";
 import UserLogged from "./UserLogged";
 import Loading from "../../components/Loading/Loading";
 
