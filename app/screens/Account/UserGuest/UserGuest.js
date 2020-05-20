@@ -22,7 +22,7 @@ export default function UserGuest() {
             <View style={ styles.btnsView }>
                 <Button
                     text="Acceder"
-                    onPress={()=> console.log("login") }
+                    onPress={()=> navigation.navigate("login") }
                     type="btnSecondary"
                 />
                 <Button
