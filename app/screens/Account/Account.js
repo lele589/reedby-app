@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as firebase from "firebase";
 
 import UserGuest from "./UserGuest/UserGuest";
-import UserLogged from "./UserLogged";
+import UserLogged from "./UserLogged/UserLogged";
 import Loading from "../../components/Loading/Loading";
 
 export default function Account() {
