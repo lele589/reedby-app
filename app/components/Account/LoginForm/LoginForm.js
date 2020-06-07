@@ -1,60 +1,36 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Input, Icon } from 'react-native-elements';
-import { size, isEmpty } from 'lodash';
+import { useNavigation } from "@react-navigation/native";
 import firebase from "firebase";
 
 import Button from "../../Button/Button";
-import { validateEmail } from "../../../utils/formValidations";
-
-import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 import Loading from "../../Loading/Loading";
-import FormError from "../../FormError/FormError";
+import useValidation from "../../../hooks/useValidation";
+import loginValidation, { loginDefaultData } from "../../../utils/validations/loginValidation";
+import { styles } from "./styles";
 
 export default function LoginForm() {
 
-    const[formData, setFormData] = useState(defaultFormData);
     const[showPass, setShowPass] = useState(false);
-    const[error, setError] = useState(false);
-    const[errorMessage, setErrorMessage] = useState('');
     const[loading, setLoading] = useState(false);
+
+    const { formData, errors, handleChange, handleSubmit } = useValidation(loginDefaultData, loginValidation, onSubmit);
 
     const navigation = useNavigation();
 
-    const _onChange = (e, type) => {
-        setFormData({
-            ...formData,
-            [type]: e.nativeEvent.text
-        })
-    };
-
-    const _onSubmit = () => {
-        if ( isEmpty(formData.email) || isEmpty(formData.pass) ) {
-            setError(true);
-            setErrorMessage('Todos los campos son obligatorios');
-        } else if (!validateEmail(formData.email)) {
-            setError(true);
-            setErrorMessage('El email no tiene un formato correcto');
-        } else if (size(formData.pass) < 6) {
-            setError(true);
-            setErrorMessage('La contraseña debe tener mínimo 6 caracteres');
-        } else {
-            setError(false);
-            setLoading(true);
-            firebase
-                .auth().signInWithEmailAndPassword(formData.email, formData.pass)
-                .then( () => {
-                    setLoading(false);
-                    navigation.navigate("account");
-                })
-                .catch( () => {
-                    setLoading(false);
-                    setError(true);
-                    setErrorMessage('Email o contraseña incorrecta');
-                });
-        }
-    };
+    function onSubmit() {
+        setLoading(true);
+        firebase
+            .auth().signInWithEmailAndPassword(formData.email, formData.pass)
+            .then( () => {
+                setLoading(false);
+                navigation.navigate("account");
+            })
+            .catch( () => {
+                setLoading(false);
+        });
+    }
 
     return (
         <View style={styles.formView}>
@@ -64,7 +40,7 @@ export default function LoginForm() {
                 placeholder="Correo electrónico"
                 containerStyle={ styles.inputContainer }
                 inputStyle={ styles.input }
-                onChange={ (e) => _onChange(e, 'email')}
+                onChange={ (e) => handleChange(e, 'email')}
                 clearButtonMode="always"
                 importantForAutofill="auto"
                 keyboardType="email-address"
@@ -77,12 +53,14 @@ export default function LoginForm() {
                         iconStyle={ styles.iconLeft}
                     />
                 }
+                errorMessage={ errors.email && errors.email }
+                errorStyle={ styles.error }
             />
             <Input
                 placeholder="Contraseña"
                 containerStyle={ styles.inputContainer }
                 inputStyle={ styles.input }
-                onChange={ (e) => _onChange(e, 'pass')}
+                onChange={ (e) => handleChange(e, 'pass')}
                 password={true}
                 secureTextEntry={!showPass}
                 clearButtonMode="always"
@@ -104,20 +82,16 @@ export default function LoginForm() {
                         onPress={() => setShowPass(!showPass)}
                     />
                 }
+                errorMessage={ errors.pass && errors.pass}
+                errorStyle={styles.error}
             />
-            { error && <FormError text={errorMessage} />}
             <Button
                 text="Iniciar sesión"
                 type="btnMain"
-                onPress={_onSubmit}
+                onPress={handleSubmit}
                 buttonStyle={{ width: '95%', marginTop: 10}}
             />
             <Loading text="Iniciando sesión..." isVisible={loading} />
         </View>
     )
-};
-
-const defaultFormData = {
-    email: '',
-    pass: ''
 };
