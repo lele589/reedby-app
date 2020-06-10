@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator} from "@react-navigation/stack";
-import Explore from "../screens/Explore";
+import Explore from "../screens/Explore/Explore";
 
 const Stack = createStackNavigator();
 
