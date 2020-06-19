@@ -1,5 +1,3 @@
-import firebase from "firebase/app";
-
 const firebaseConfig = {
     apiKey: "AIzaSyCu1wXcTGJ0BMsVWU9D24a3zwd7tRYCPq0",
     authDomain: "reedby-app.firebaseapp.com",
@@ -11,4 +9,4 @@ const firebaseConfig = {
     measurementId: "G-LT51B3DRWX"
 };
 
-export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export default firebaseConfig;

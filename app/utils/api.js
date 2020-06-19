@@ -6,15 +6,6 @@ export const createNickName = (email) => {
     return email.replace(regex, '');
 };
 
-export const reauthenticate = (pass) => {
-    const user = firebase.auth().currentUser;
-    const credentials = firebase.auth.EmailAuthProvider.credential(
-        user.email,
-        pass
-    );
-    return user.reauthenticateWithCredential(credentials);
-};
-
 export const sendMailTo = (data) => {
     const to = 'reedbyapp@gmail.com';
     const subject = data.subject;
