@@ -1,7 +1,8 @@
 import React from 'react';
 import { AppLoading } from 'expo';
 import Navigation from "./app/navigations/Navigation";
-import { firebaseApp } from "./app/utils/firebase";
+import useAuthentication from "./app/hooks/useAuthentication";
+import firebase, { FirebaseContext } from './app/config/firebase';
 
 import {
   useFonts,
@@ -17,11 +18,20 @@ export default function App() {
     Jost_500Medium,
   });
 
+  const user = useAuthentication();
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
-        <Navigation/>
+        <FirebaseContext.Provider
+            value={{
+              firebase,
+              user
+            }}
+        >
+          <Navigation/>
+        </FirebaseContext.Provider>
     );
   }
 }
