@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import * as firebase from "firebase";
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
+import { FirebaseContext } from "../../../config/firebase";
 
-import defaultAvatar from '../../../../assets/img/avatar.png'
+import { createNickName } from "../../../utils/user";
+import defaultAvatar from '../../../../assets/img/avatar.png';
 import Loading from "../../../components/Loading/Loading";
 import { styles } from './styles';
 
-export default function UserInfo({ user, nickName }) {
+export default function UserInfo() {
 
     const[loading, setLoading] = useState(false);
+
+    const { user, firebase } = useContext(FirebaseContext);
 
     const _editAvatar = async () => {
         const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -34,7 +37,7 @@ export default function UserInfo({ user, nickName }) {
     const _uploadAvatarToFirebase = async (uri) => {
         const response = await fetch(uri);
         const blob = await response.blob();
-        const ref = firebase.storage().ref().child(`avatar/${user.uid}`);
+        const ref = firebase.storage.ref().child(`avatar/${user.uid}`);
         return ref.put(blob)
             .then(() => {
                 _updateAvatarUrl();
@@ -46,10 +49,10 @@ export default function UserInfo({ user, nickName }) {
 
     const _updateAvatarUrl = () => {
         setLoading(true);
-        firebase.storage().ref(`avatar/${user.uid}`).getDownloadURL()
+        firebase.storage.ref(`avatar/${user.uid}`).getDownloadURL()
             .then(async (response) => {
                 const update = { photoURL: response};
-                await firebase.auth().currentUser.updateProfile(update);
+                await firebase.updateProfile(update);
                 setLoading(false);
             })
             .catch(() => {
@@ -77,7 +80,7 @@ export default function UserInfo({ user, nickName }) {
                 onAccessoryPress={_editAvatar}
             />
             <View>
-                <Text style={styles.name}>{user.displayName || nickName}</Text>
+                <Text style={styles.name}>{user.displayName || createNickName(user.email)}</Text>
                 <Text style={styles.bookshelf}>Colección de 45 libros (25 leídos)</Text>
             </View>
             <Loading isVisible={loading} text="Actualizando avatar..." />

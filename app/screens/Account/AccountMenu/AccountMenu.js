@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { FirebaseContext } from "../../../config/firebase";
 
+import { sendMailTo } from "../../../utils/share";
+import { createNickName } from "../../../utils/user";
 import Modal from "../../../components/Modal/Modal";
 import ChangeDisplayName from "../../../components/Account/ChangeDisplayName/ChangeDisplayName";
 import ChangePassword from "../../../components/Account/ChangePassword/ChangePassword";
-import { sendMailTo } from "../../../utils/api";
 import { styles } from './styles';
 
-export default function AccountMenu({ user, nickName, setReloadUserInfo }) {
+export default function AccountMenu({ setReloadUserInfo }) {
 
     const[showModal, setShowModal] = useState(false);
     const[renderModalText, setRenderModalText] = useState(false);
     const[errorMessage, setErrorMessage] = useState(false);
 
+    const { user } = useContext(FirebaseContext);
+
     const _getItemTitle = (item) => {
         if(item.infoType === 'name') {
-            return user.displayName || nickName;
+            return user.displayName || createNickName(user.email);
         } else if (item.infoType) {
             return user[item.infoType];
         } else {
@@ -30,8 +34,6 @@ export default function AccountMenu({ user, nickName, setReloadUserInfo }) {
                 setErrorMessage(null);
                 setShowModal(true);
                 setRenderModalText(<ChangeDisplayName
-                    displayName={user.displayName}
-                    nickName={nickName}
                     setShowModal={setShowModal}
                     setReloadUserInfo={setReloadUserInfo}
                 />);

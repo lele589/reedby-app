@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { Input, Icon } from 'react-native-elements';
 import { useNavigation } from "@react-navigation/native";
-import firebase from "firebase";
+import { FirebaseContext } from "../../../config/firebase";
 
-import Button from "../../Button/Button";
-import Loading from "../../Loading/Loading";
 import useValidation from "../../../hooks/useValidation";
 import loginValidation, { loginDefaultData } from "../../../utils/validations/loginValidation";
+import Button from "../../Button/Button";
+import FormError from "../../FormError/FormError";
 import { styles } from "./styles";
 
 export default function LoginForm() {
 
     const[showPass, setShowPass] = useState(false);
     const[loading, setLoading] = useState(false);
+    const[errorMessage, setErrorMessage] = useState(null);
 
     const { formData, errors, handleChange, handleSubmit } = useValidation(loginDefaultData, loginValidation, onSubmit);
+    const { firebase } = useContext(FirebaseContext);
 
     const navigation = useNavigation();
 
     function onSubmit() {
+        setErrorMessage(null);
         setLoading(true);
-        firebase
-            .auth().signInWithEmailAndPassword(formData.email, formData.pass)
-            .then( () => {
-                setLoading(false);
-                navigation.navigate("account");
-            })
-            .catch( () => {
-                setLoading(false);
-        });
+        login(formData.email, formData.pass);
+    }
+
+    async function login(email, pass) {
+        try {
+            await firebase.userLogin(email, pass);
+            setLoading(false);
+            navigation.navigate("account");
+        } catch {
+            setLoading(false);
+            setErrorMessage('Los datos de acceso no son correctos');
+        }
     }
 
     return (
@@ -85,13 +91,14 @@ export default function LoginForm() {
                 errorMessage={ errors.pass && errors.pass}
                 errorStyle={styles.error}
             />
+            { errorMessage && <FormError text={errorMessage} />}
             <Button
                 text="Iniciar sesión"
                 type="btnMain"
                 onPress={handleSubmit}
                 buttonStyle={{ width: '95%', marginTop: 10}}
+                loading={loading}
             />
-            <Loading text="Iniciando sesión..." isVisible={loading} />
         </View>
     )
 };

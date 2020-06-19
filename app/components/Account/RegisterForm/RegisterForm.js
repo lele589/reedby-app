@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { Input, Icon } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native'
-import firebase from "firebase";
+import { useNavigation } from '@react-navigation/native';
+import { FirebaseContext } from "../../../config/firebase";
 
-import Button from "../../Button/Button";
-import Loading from "../../Loading/Loading";
-import FormError from "../../FormError/FormError";
 import useValidation from "../../../hooks/useValidation";
 import registerValidation, { registerDefaultData } from "../../../utils/validations/registerValidation";
+import FormError from "../../FormError/FormError";
+import Button from "../../Button/Button";
 import { styles } from './styles';
 
 export default function RegisterForm() {
@@ -19,22 +18,25 @@ export default function RegisterForm() {
     const[errorMessage, setErrorMessage] = useState(null);
 
     const { formData, errors, handleChange, handleSubmit } = useValidation(registerDefaultData, registerValidation, onSubmit);
+    const { firebase } = useContext(FirebaseContext);
 
     const navigation = useNavigation();
 
     function onSubmit() {
-        setLoading(true);
-        firebase
-            .auth().createUserWithEmailAndPassword(formData.email, formData.pass)
-            .then( () => {
-                setLoading(false); // Antes de la navegación!! sino estamos cambiando el estado a un componente desmontado (al cambiar de ruta se desmonta)
-                navigation.navigate("account");
-            })
-            .catch( () => {
-                setLoading(false);
-                setErrorMessage('El email ya está en uso');
-            });
         setErrorMessage(null);
+        setLoading(true);
+        register(formData.email, formData.pass);
+    }
+
+    async function register(email, pass) {
+        try {
+            await firebase.userRegister(email, pass);
+            setLoading(false);
+            navigation.navigate("account");
+        } catch {
+            setLoading(false);
+            setErrorMessage('El email ya está en uso');
+        }
     }
 
     return (
@@ -123,8 +125,8 @@ export default function RegisterForm() {
                 type="btnMain"
                 onPress={handleSubmit}
                 buttonStyle={{ width: '95%', marginTop: 10}}
+                loading={loading}
             />
-            <Loading text="Creando cuenta..." isVisible={loading} />
         </View>
     )
 };

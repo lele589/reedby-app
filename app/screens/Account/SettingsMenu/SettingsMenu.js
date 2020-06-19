@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, View } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import * as firebase from "firebase";
+import { FirebaseContext } from "../../../config/firebase";
 
-import { styles } from './styles';
-import { sendMailTo, getAppLink, onShare } from "../../../utils/api";
+import { sendMailTo, getAppLink, onShare } from "../../../utils/share";
 import Modal from "../../../components/Modal/Modal";
+import { styles } from './styles';
 
-export default function SettingsMenu({ user }) {
+export default function SettingsMenu() {
 
     const[showModal, setShowModal] = useState(false);
     const[renderModalText, setRenderModalText] = useState(false);
     const[errorMessage, setErrorMessage] = useState(null);
+
+    const { firebase } = useContext(FirebaseContext);
 
     const shareAppOptions = {
         title: 'App link',
@@ -36,7 +38,7 @@ export default function SettingsMenu({ user }) {
                 });
                 break;
             case 'signOut':
-                firebase.auth().signOut();
+                firebase.signOut();
                 break;
             default:
                 break;

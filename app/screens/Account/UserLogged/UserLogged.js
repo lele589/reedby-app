@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
+import { FirebaseContext } from "../../../config/firebase";
 
 import UserInfo from "../UserInfo/UserInfo";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import SettingsMenu from "../SettingsMenu/SettingsMenu";
-import * as firebase from "firebase";
 
 import { styles } from "./styles";
-import { createNickName } from "../../../utils/api";
 
 export default function UserLogged() {
 
     const[userData, setUserData] = useState(null);
-    const[nickName, setNickName] = useState(null);
     const[reloadUserInfo, setReloadUserInfo] = useState(false);
+
+    const { user } = useContext(FirebaseContext);
 
     useEffect(() => {
         (async () => {
-            const user = await firebase.auth().currentUser;
             setUserData(user);
-            setNickName(createNickName(user.email));
         })();
         setReloadUserInfo(false);
     }, [reloadUserInfo]);
@@ -33,9 +31,9 @@ export default function UserLogged() {
             showsVerticalScrollIndicator={false}
             stickyHeaderIndices={[0]}
         >
-            {userData && <UserInfo user={userData} nickName={nickName} setReloadUserInfo={setReloadUserInfo}/> }
-            {userData && <AccountMenu user={userData} nickName={nickName} setReloadUserInfo={setReloadUserInfo}/> }
-            <SettingsMenu user={userData}/>
+            {userData && <UserInfo setReloadUserInfo={setReloadUserInfo}/> }
+            {userData && <AccountMenu setReloadUserInfo={setReloadUserInfo}/> }
+            <SettingsMenu />
         </ScrollView>
     )
 };

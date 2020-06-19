@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import * as firebase from "firebase";
+import React, { useContext } from 'react';
+import { FirebaseContext } from "../../config/firebase"
 
 import UserGuest from "./UserGuest/UserGuest";
 import UserLogged from "./UserLogged/UserLogged";
-import Loading from "../../components/Loading/Loading";
 
 export default function Account() {
 
-    const [login, setLogin] = useState(null);
-
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged( user => {
-            !user ? setLogin(false) : setLogin(true);
-        })
-    }, [login]);
-
-    if (login === null) return <Loading isVisible={true} text="Cargando..." />
+    const { user } = useContext(FirebaseContext);
 
     return (
-        login ? <UserLogged/> : <UserGuest/>
+        user ? <UserLogged/> : <UserGuest/>
     )
 };

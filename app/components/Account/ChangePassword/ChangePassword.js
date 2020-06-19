@@ -1,77 +1,54 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { Input, Icon } from 'react-native-elements';
-import { size } from 'lodash';
-import * as firebase from "firebase";
+import { FirebaseContext } from "../../../config/firebase"
 
+import useValidation from "../../../hooks/useValidation";
+import changePassValidation, { changePassDefaultData } from "../../../utils/validations/changePassValidation";
 import Button from '../../Button/Button';
-import { reauthenticate } from "../../../utils/api";
 import { styles } from "./styles";
 
 export default function ChangePassword({ setShowModal }) {
 
-    const[formData, setFormData] = useState(defaultFormData());
     const[showPass, setShowPass] = useState(false);
     const[showNewPass, setShowNewPass] = useState(false);
     const[showRepeatNewPass, setShowRepeatNewPass] = useState(false);
-    const[errors, setErrors] = useState({});
     const[isLoading, setIsLoading] = useState(false);
 
-    const _onChange = (e, type) => {
-        setFormData({...formData, [type]: e.nativeEvent.text});
-    };
+    const { formData, errors, handleChange, handleSubmit } = useValidation(changePassDefaultData, changePassValidation, onSubmit);
+    const { firebase } = useContext(FirebaseContext);
 
-    const _onSubmit = async () => {
-        let isSetErrors = true;
-        let errorsTemp = {};
-        setErrors({});
-        if(!formData.pass || !formData.newPass || !formData.repeatNewPass) {
-            errorsTemp = {
-                pass: !formData.pass ? 'Este campo es obligatorio' : '',
-                newPass: !formData.newPass ? 'Este campo es obligatorio' : '',
-                repeatNewPass: !formData.repeatNewPass ? 'Este campo es obligatorio' : ''
-            };
-        } else if (formData.newPass !== formData.repeatNewPass) {
-            errorsTemp = {
-                newPass: 'Las contraseñas no son iguales',
-                repeatNewPass: 'Las contraseñas no son iguales'
-            };
-        } else if (size(formData.newPass) < 6) {
-            errorsTemp = {
-                newPass: 'La contraseña debe tener más de 6 caracteres',
-            };
-        } else {
-            setIsLoading(true);
-            await reauthenticate(formData.pass)
+    function onSubmit() {
+        setIsLoading(true);
+        reauthenticate(formData.pass, formData.newPass);
+    }
+
+    async function reauthenticate(pass, newPass) {
+        try {
+            await firebase.reauthenticate(pass)
                 .then(async () => {
-                    await firebase.auth().currentUser.updatePassword(formData.newPass)
-                        .then(() => {
-                            isSetErrors = false;
-                            setIsLoading(false);
-                            setShowModal(false);
-                            firebase.auth().signOut();
-                        })
-                        .catch(() => {
-                            errorsTemp = {
-                                other: 'Error al actualizar la contraseña',
-                            };
-                            setIsLoading(false);
-                        })
-                }).catch(() => {
-                    setIsLoading(false);
-                    errorsTemp = {
-                        pass: 'La contraseña no es correcta',
-                    };
-                });
+                    await firebase.updatePass(newPass)
+                    .then(() => {
+                        setIsLoading(false);
+                        setShowModal(false);
+                        firebase.signOut();
+                    })
+                    .catch((error) => {
+                        setIsLoading(false);
+                        console.log(error)
+                    })
+            });
+        } catch (error) {
+            setIsLoading(false);
+            console.log(error);
         }
-        isSetErrors && setErrors(errorsTemp);
-    };
+    }
 
     return (
         <View style={styles.view}>
             <Input
                 placeholder="Contraseña actual"
-                onChange={ (e) => _onChange(e, 'pass')}
+                onChange={ (e) => handleChange(e, 'pass')}
                 password={true}
                 secureTextEntry={!showPass}
                 clearButtonMode="always"
@@ -97,7 +74,7 @@ export default function ChangePassword({ setShowModal }) {
             />
             <Input
                 placeholder="Nueva contraseña"
-                onChange={ (e) => _onChange(e, 'newPass')}
+                onChange={ (e) => handleChange(e, 'newPass')}
                 password={true}
                 secureTextEntry={!showNewPass}
                 clearButtonMode="always"
@@ -122,7 +99,7 @@ export default function ChangePassword({ setShowModal }) {
             />
             <Input
                 placeholder="Repetir contraseña"
-                onChange={ (e) => _onChange(e, 'repeatNewPass')}
+                onChange={ (e) => handleChange(e, 'repeatNewPass')}
                 password={true}
                 secureTextEntry={!showRepeatNewPass}
                 clearButtonMode="always"
@@ -150,17 +127,9 @@ export default function ChangePassword({ setShowModal }) {
                 text="Guardar"
                 type="btnMain"
                 buttonStyle={{ width: '90%', marginTop: 10 }}
-                onPress={_onSubmit}
+                onPress={handleSubmit}
                 loading={isLoading}
             />
         </View>
     )
-};
-
-const defaultFormData = () => {
-    return {
-        pass: '',
-        newPass: '',
-        repeatNewPass: ''
-    }
 };

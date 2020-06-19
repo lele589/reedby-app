@@ -3,7 +3,6 @@ import { ScrollView, View, Text, Image } from 'react-native';
 
 import SocialLogin from "../../../components/Account/SocialLogin/SocialLogin";
 import LoginForm from "../../../components/Account/LoginForm/LoginForm";
-
 import { styles } from "./styles";
 
 export default function Login() {
