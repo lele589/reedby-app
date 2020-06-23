@@ -20,6 +20,7 @@ export default function Navigation() {
                 tabBarOptions={{
                     inactiveTintColor: Colors.grey,
                     activeTintColor: Colors.green,
+                    keyboardHidesTabBar: true
                 }}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ color }) => screenOptions(route, color)
