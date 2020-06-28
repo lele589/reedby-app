@@ -73,7 +73,7 @@ export default function Explore() {
 
     return (
         <View style={styles.view}>
-            { search && <BookCategories search={search}/> }
+            <SubjectsList />
             { search && <BooksList search={search}/> }
         </View>
     )
