@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import firebaseConfig from './config';
 import 'firebase/auth';
 import 'firebase/storage';
+import 'firebase/firestore';
 
 class Firebase {
     constructor() {
@@ -11,6 +12,7 @@ class Firebase {
         this.auth = app.auth();
         this.authCredentials = app.auth;
         this.storage = app.storage();
+        this.db = app.firestore();
     }
 
     async userRegister(email, pass) {
@@ -40,6 +42,29 @@ class Firebase {
 
     async updateProfile(update) {
         return await this.auth.currentUser.updateProfile(update);
+    };
+
+    async getSubjects(state, setState, onlyMain) {
+        const totalSubjects = [];
+        return await firebase.db.collection("subjects")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach(function(doc) {
+                    const subject = doc.data();
+                    subject.id = doc.id;
+
+                    if(!onlyMain) {
+                        totalSubjects.push(subject);
+
+                    } else if(onlyMain && subject.main) {
+                        totalSubjects.push(subject);
+                    }
+                });
+                setState(totalSubjects);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 }
 
