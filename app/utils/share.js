@@ -1,10 +1,4 @@
-import * as firebase from "firebase";
 import { Linking, Share, Platform } from 'react-native';
-
-export const createNickName = (email) => {
-    const regex = /@.*$/gm;
-    return email.replace(regex, '');
-};
 
 export const sendMailTo = (data) => {
     const to = 'reedbyapp@gmail.com';
