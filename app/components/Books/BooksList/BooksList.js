@@ -14,7 +14,7 @@ export default function BooksList() {
     // books+${actualSearch}&maxResults=${maxResults}&orderBy=${orderBy}&langRestrict=es
     const [booksList, setBooksList] = useState([]);
 
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=la+historia+interminable`;
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=la+historia+interminable&fields=items(id,volumeInfo)`;
 
     const getBooks = async () => {
        const data = await fetch(apiUrl);
