@@ -7,16 +7,23 @@ import TextCustom from "../../TextCustom/TextCustom";
 import Tag from "../../Tag/Tag";
 import { styles } from './styles';
 
-export default function Book({ book }) {
+export default function Book({ book, navigation }) {
 
     const { title, author_name, isbn, subject } = book;
-    const defaultImage = 'https://firebasestorage.googleapis.com/v0/b/reedby-app.appspot.com/o/default%2Fbook-cover-light-gray-1.png?alt=media&token=81d2100f-ddde-4112-99f1-63209555ab5d'
+    const defaultImage = 'https://firebasestorage.googleapis.com/v0/b/reedby-app.appspot.com/o/default%2Fbook-cover-light-gray-1.png?alt=media&token=81d2100f-ddde-4112-99f1-63209555ab5d';
 
     const[imageUrl, setImageUrl]= useState(defaultImage);
     const[subjectsList, setSubjectsList]= useState(subject);
     const[finalSubjectList, setFinalSubjectList]= useState([]);
 
     const { firebase } = useContext(FirebaseContext);
+
+    const goBookInfo = async () => {
+        navigation.navigate("book-info", {
+            isbn: isbn,
+            name: title
+        });
+    };
 
     useEffect(() => {
         getBookCover(setImageUrl, isbn[0]);
@@ -48,7 +55,9 @@ export default function Book({ book }) {
     };
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={goBookInfo}
+        >
             <View style={styles.view}>
                 <View style={styles.bookImageView}>
                     <Image
