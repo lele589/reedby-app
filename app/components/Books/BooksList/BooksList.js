@@ -14,12 +14,12 @@ export default function BooksList() {
     // books+${actualSearch}&maxResults=${maxResults}&orderBy=${orderBy}&langRestrict=es
     const [booksList, setBooksList] = useState([]);
 
-    const apiUrl = `http://openlibrary.org/search.json?title=la+historia+interminable`;
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=la+historia+interminable`;
 
     const getBooks = async () => {
        const data = await fetch(apiUrl);
        const books = await data.json();
-        setBooksList(books['docs']);
+        setBooksList(books['items']);
     };
 
     useEffect(() => {
@@ -34,9 +34,8 @@ export default function BooksList() {
                 ?
                 <FlatList
                     data={booksList}
-                    renderItem={({ item }) => item['isbn'] && <Book book={item} navigation={navigation}/>}
-                    keyExtractor={item => item.key}
-                    removeClippedSubviews={true}
+                    renderItem={({ item }) => <Book book={item} navigation={navigation}/>}
+                    keyExtractor={item => item.id}
                     ItemSeparatorComponent={BookListSeparator}
                     onEndReachedThreshold={0.5} // Esto indica a partir de cuando se va a ejecutar nuestra función (contando desde abajo (por ejemplo, antes de llegar al footer)
                 />

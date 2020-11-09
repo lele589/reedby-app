@@ -2,33 +2,33 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Image, TouchableOpacity } from 'react-native';
 import { FirebaseContext } from "../../../config/firebase";
 
-import { getBookCover } from "../../../utils/books";
 import TextCustom from "../../TextCustom/TextCustom";
 import Tag from "../../Tag/Tag";
 import { styles } from './styles';
 
 export default function Book({ book, navigation }) {
 
-    const { title, author_name, isbn, subject } = book;
-    const defaultImage = 'https://firebasestorage.googleapis.com/v0/b/reedby-app.appspot.com/o/default%2Fbook-cover-light-gray-1.png?alt=media&token=81d2100f-ddde-4112-99f1-63209555ab5d';
+    const { id } = book;
+    const { title, authors, categories, imageLinks } = book['volumeInfo'];
+    const subjects = categories;
+    const defaultThumb = 'https://firebasestorage.googleapis.com/v0/b/reedby-app.appspot.com/o/default%2Fbook-cover-light-gray-1.png?alt=media&token=81d2100f-ddde-4112-99f1-63209555ab5d';
+    const thumb = imageLinks ? imageLinks['smallThumbnail'] : defaultThumb;
 
-    const[imageUrl, setImageUrl]= useState(defaultImage);
-    const[subjectsList, setSubjectsList]= useState(subject);
+    const[subjectsList, setSubjectsList]= useState(subjects);
     const[finalSubjectList, setFinalSubjectList]= useState([]);
 
     const { firebase } = useContext(FirebaseContext);
 
     const goBookInfo = async () => {
         navigation.navigate("book-info", {
-            isbn: isbn,
+            id,
             name: title
         });
     };
 
     useEffect(() => {
-        getBookCover(setImageUrl, isbn[0]);
-        if(subject) {
-            setSubjectsList(subject);
+        if(subjects) {
+            setSubjectsList(subjects);
             firebase.getDbSubjects(false)
                 .then(dbSubjects => {
                     getFinalSubjects(dbSubjects);
@@ -61,7 +61,7 @@ export default function Book({ book, navigation }) {
             <View style={styles.view}>
                 <View style={styles.bookImageView}>
                     <Image
-                        source={{ uri: imageUrl }}
+                        source={{ uri: thumb }}
                         resizeMode="cover"
                         style={styles.image}
                     />
@@ -75,11 +75,11 @@ export default function Book({ book, navigation }) {
                                 {title}
                         </TextCustom>
                     }
-                    {author_name &&
+                    {authors &&
                         <TextCustom
                             numberOfLines={1}
                             textStyles={styles.author}>
-                                {author_name.toString()}
+                                {authors.toString()}
                         </TextCustom>
                     }
                     {finalSubjectList.length > 0 &&
