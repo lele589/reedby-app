@@ -22,7 +22,8 @@ export default function Book({ book, navigation }) {
     const goBookInfo = async () => {
         navigation.navigate("book-info", {
             id,
-            name: title
+            name: title,
+            subjects: finalSubjectList
         });
     };
 

@@ -9,7 +9,7 @@ import { Colors } from "../../../styles";
 
 export default function BookInfo({ navigation, route }) {
 
-    const { id, name } = route.params;
+    const { id, name, subjects } = route.params;
     const[bookData, setBookData] = useState(null);
 
     navigation.setOptions({ title: name});
@@ -32,7 +32,7 @@ export default function BookInfo({ navigation, route }) {
                 <View style={styles.bookInfoView}>
                     <Book book={bookData}/>
                     <BookListSeparator />
-                    <BookDetails book={bookData} />
+                    <BookDetails book={bookData} subjectsList={subjects} />
                 </View>
                 :
                 <View style={styles.loaderView}>
