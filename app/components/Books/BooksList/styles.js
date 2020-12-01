@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../../styles";
 
 export const styles = StyleSheet.create({
+    view: {
+      height: '100%',
+      paddingBottom: 175
+    },
     loaderView: {
         marginTop: 10,
         marginBottom: 10,

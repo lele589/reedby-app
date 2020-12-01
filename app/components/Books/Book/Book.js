@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Image, TouchableOpacity } from 'react-native';
 import { FirebaseContext } from "../../../config/firebase";
+//TODO: mejorar performance con pure? recarga la vista al volver
+//import { pure } from 'recompose';
 
 import TextCustom from "../../TextCustom/TextCustom";
 import Tag from "../../Tag/Tag";
@@ -101,3 +103,6 @@ export default function Book({ book, navigation }) {
         </TouchableOpacity>
     )
 } ;
+
+//TODO: mejorar performance con pure? recarga la vista al volver
+//export default pure(Book);
