@@ -8,7 +8,7 @@ import { FirebaseContext } from "../../../config/firebase";
 
 import { createNickName } from "../../../utils/user";
 import defaultAvatar from '../../../../assets/img/avatar.png';
-import Loading from "../../../components/Loading/Loading";
+import ModalLoader from "../../../components/Loaders/ModalLoader/ModalLoader";
 import { styles } from './styles';
 
 export default function UserInfo() {
@@ -83,7 +83,7 @@ export default function UserInfo() {
                 <Text style={styles.name}>{user.displayName || createNickName(user.email)}</Text>
                 <Text style={styles.bookshelf}>Colección de 45 libros (25 leídos)</Text>
             </View>
-            <Loading isVisible={loading} text="Actualizando avatar..." />
+            <ModalLoader isVisible={loading} text="Actualizando avatar..." />
         </View>
     )
 };

@@ -4,7 +4,7 @@ import { Overlay } from 'react-native-elements';
 
 import { styles } from './styles';
 
-export default function Loading({ isVisible, text }) {
+export default function ModalLoader({ isVisible, text }) {
     return (
         <Overlay
             isVisible={ isVisible }
