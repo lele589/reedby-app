@@ -10,10 +10,8 @@ import { styles } from "./styles";
 export default function Explore() {
 
     const [search, setSearch] = useState('');
-    const [loading, setLoading] = useState(false);
 
     const updateSearch = (newSearch) => {
-        setLoading(true);
         setSearch(newSearch);
     };
 
@@ -21,7 +19,7 @@ export default function Explore() {
         <View style={styles.view}>
             <SearchBar
                 placeholder="Título, autor, ISBN"
-                onChangeText={updateSearch}
+                onChangeText={(e) => updateSearch(e)}
                 value={search}
                 containerStyle={styles.searchBar}
                 inputContainerStyle={styles.searchBarContainer}
@@ -35,9 +33,7 @@ export default function Explore() {
                     <BooksList />
                 </View>
                 :
-                <View>
-                    <SearchResults loading={loading}/>
-                </View>
+                <SearchResults search={search}/>
             }
         </View>
     )
