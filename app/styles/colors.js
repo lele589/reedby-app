@@ -1,5 +1,9 @@
 // Brand colors
-export const green = '#69b387';
+export const green = '#50746C';
+export const greenLight = '#A7B9B1';
+export const yellow = '#E7B34E';
+export const yellowLight = '#eee0c2';
+export const brown = '#DCC8A9';
 export const red = '#f77171';
 
 // Greyscale
