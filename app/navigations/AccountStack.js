@@ -28,7 +28,10 @@ export default function AccountStack({ navigation, route}) {
     }
 
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+            headerShown: false,
+            cardStyle: {backgroundColor: Colors.green},
+        }}>
             <Stack.Screen
                 name="account"
                 component={Account}

@@ -27,6 +27,10 @@
     "android": {
       "permissions": ["CAMERA_ROLL", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
     },
+    "androidNavigationBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#50746C"
+    },
     "description": ""
   }
 }

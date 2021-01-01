@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -18,9 +18,15 @@ export default function Navigation() {
             <Tab.Navigator
                 initialRouteName="explore"
                 tabBarOptions={{
-                    inactiveTintColor: Colors.grey,
-                    activeTintColor: Colors.green,
-                    keyboardHidesTabBar: true
+                    inactiveTintColor: Colors.greenLight,
+                    activeTintColor: Colors.white,
+                    keyboardHidesTabBar: true,
+                    style: {
+                        backgroundColor: Colors.green,
+                        borderTopColor: "transparent",
+                        elevation: 0,
+                        marginBottom: Platform.OS === 'android' ? 5 : 0
+                    },
                 }}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ color }) => screenOptions(route, color)
