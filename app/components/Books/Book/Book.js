@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Image, TouchableOpacity } from 'react-native';
+import { Rating } from 'react-native-elements';
 import { FirebaseContext } from "../../../config/firebase";
 //TODO: mejorar performance con pure? recarga la vista al volver
 //import { pure } from 'recompose';
@@ -7,11 +8,12 @@ import { FirebaseContext } from "../../../config/firebase";
 import TextCustom from "../../TextCustom/TextCustom";
 import Tag from "../../Tags/Tag/Tag";
 import { styles } from './styles';
+import { Colors } from "../../../styles";
 
 export default function Book({ book, navigation }) {
 
     const { id } = book;
-    const { title, authors, categories, imageLinks } = book['volumeInfo'];
+    const { title, authors, categories, imageLinks, ratingsCount, averageRating } = book['volumeInfo'];
     const subjects = categories;
     const defaultThumb = 'https://firebasestorage.googleapis.com/v0/b/reedby-app.appspot.com/o/default%2Fbook-cover-light-gray-1.png?alt=media&token=81d2100f-ddde-4112-99f1-63209555ab5d';
     const thumb = imageLinks ? imageLinks['smallThumbnail'] : defaultThumb;
@@ -84,6 +86,22 @@ export default function Book({ book, navigation }) {
                             textStyles={styles.author}>
                                 {authors.toString()}
                         </TextCustom>
+                    }
+                    {ratingsCount &&
+                        <View style={styles.ratingView}>
+                            <Rating
+                                readonly
+                                imageSize={20}
+                                fractions={1}
+                                startingValue={averageRating}
+                                type='custom'
+                                tintColor={Colors.white}
+                                ratingColor={Colors.green}
+                                ratingBackgroundColor={Colors.greyLight2}
+                                style={styles.rating} />
+                            <TextCustom weight="bold" textStyles={styles.ratingText}>{averageRating}</TextCustom>
+                            <TextCustom textStyles={styles.ratingTextCount}>({ratingsCount})</TextCustom>
+                        </View>
                     }
                     {finalSubjectList.length > 0 &&
                         <View style={styles.tagView}>
