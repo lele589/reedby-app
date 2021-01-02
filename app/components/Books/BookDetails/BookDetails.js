@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { replace } from "lodash";
 
 import Caption from "../../Caption/Caption";
-import Tag from "../../Tag/Tag";
+import Tag from "../../Tags/Tag/Tag";
 import { styles } from './styles';
 
 export default function BookDetails({ book, subjectsList }) {

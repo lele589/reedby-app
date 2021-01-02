@@ -5,7 +5,7 @@ import { FirebaseContext } from "../../../config/firebase";
 //import { pure } from 'recompose';
 
 import TextCustom from "../../TextCustom/TextCustom";
-import Tag from "../../Tag/Tag";
+import Tag from "../../Tags/Tag/Tag";
 import { styles } from './styles';
 
 export default function Book({ book, navigation }) {

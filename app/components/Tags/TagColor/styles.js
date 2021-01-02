@@ -2,11 +2,16 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../../styles";
 
 export const styles = StyleSheet.create({
-    subjectView: {
-        margin: 10,
-        alignItems: 'center'
-    },
-    subjectAvatar: {
+    subject: {
+        marginVertical: 20,
+        marginLeft: 10,
+        marginRight: 5,
+        alignItems: 'center',
+        backgroundColor: Colors.brown,
+        borderRadius: 15,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        alignSelf: 'flex-start',
         //ios
         shadowColor: Colors.greyDark,
         shadowOffset: {
@@ -18,8 +23,10 @@ export const styles = StyleSheet.create({
         //android
         elevation: 9,
     },
+    subjectActive: {
+        backgroundColor: Colors.yellow,
+    },
     subjectText: {
-        marginTop: 5,
-        color: Colors.grey
+        color: Colors.white,
     }
 });
