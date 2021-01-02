@@ -3,7 +3,6 @@ import { Colors } from "../../styles";
 
 export const styles = StyleSheet.create({
     view: {
-        backgroundColor: Colors.white,
         paddingTop: 20,
         justifyContent: 'space-between',
         flexDirection: 'row',

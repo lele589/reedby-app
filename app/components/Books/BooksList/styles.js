@@ -3,8 +3,12 @@ import { Colors } from "../../../styles";
 
 export const styles = StyleSheet.create({
     view: {
-      height: '100%',
-      paddingBottom: 175
+        height: '100%',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 40,
+        overflow: 'hidden',
+        borderRadius: 35
     },
     loaderView: {
         marginTop: 10,

@@ -7,12 +7,14 @@ import BookPlaceholder from "../../Loaders/BookPlaceholder/BookPlaceholder";
 import BookListSeparator from "../../Books/BooksList/BooklistSeparator/BooklistSeparator";
 import Book from "../../Books/Book/Book";
 import { styles } from './styles';
+import TagColor from "../../Tags/TagColor/TagColor";
 
 export default function SearchResults({ search }) {
 
     const [apiUrl, setApiUrl] = useState(null);
     const [results, setResults] = useState([]);
     const [noResults, setNoResults] = useState(false);
+    const [totalItems, setTotalItems] = useState(0);
     //const [startResult, setStartResult] = useState(0);
     const [loading, setLoading] = useState(false);
     const maxResults = 10;
@@ -34,6 +36,7 @@ export default function SearchResults({ search }) {
                         resultsArray.push(item);
                     });
                     setResults([...results, ...resultsArray]);
+                    setTotalItems(data['totalItems']);
                     //setStartResult(startResult + maxResults);
                 } else {
                     setNoResults(true);
@@ -67,7 +70,7 @@ export default function SearchResults({ search }) {
 
 
     return (
-        <View style={styles.container}>
+        <View style={styles.view}>
             { loading
                 ?
                 <BookPlaceholder
@@ -81,14 +84,19 @@ export default function SearchResults({ search }) {
                     ?
                         <SearchNoResults />
                     :
-                        <FlatList
-                            data={results}
-                            renderItem={({ item }) => <Book book={item} navigation={navigation}/>}
-                            keyExtractor={(item, index) => index.toString()}
-                            ItemSeparatorComponent={BookListSeparator}
-                            //onEndReached={handleLoadMore}
-                            //onEndReachedThreshold={0.5} // Esto indica a partir de cuando se va a ejecutar nuestra función (contando desde abajo (por ejemplo, antes de llegar al footer)
-                        />
+                        <View>
+                            <View style={styles.resultsNum}>
+                                <TagColor text={totalItems + ' Resultados'} active />
+                            </View>
+                            <FlatList
+                                data={results}
+                                renderItem={({ item }) => <Book book={item} navigation={navigation}/>}
+                                keyExtractor={(item, index) => index.toString()}
+                                ItemSeparatorComponent={BookListSeparator}
+                                //onEndReached={handleLoadMore}
+                                //onEndReachedThreshold={0.5} // Esto indica a partir de cuando se va a ejecutar nuestra función (contando desde abajo (por ejemplo, antes de llegar al footer)
+                            />
+                        </View>
                 )
             }
         </View>

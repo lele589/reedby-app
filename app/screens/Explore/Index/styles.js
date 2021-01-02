@@ -3,20 +3,29 @@ import { Colors } from "../../../styles";
 
 export const styles = StyleSheet.create({
     view: {
-        backgroundColor: Colors.white,
         height: '100%',
+    },
+    viewContentContainer: {
+        backgroundColor: Colors.white,
+        borderRadius: 35,
+        marginTop: 40,
+        height: '100%',
+    },
+    header: {
         paddingLeft: 20,
-        paddingRight: 20
+        paddingTop: 40,
+    },
+    headerText: {
+        color: Colors.white,
     },
     searchBar: {
         backgroundColor: Colors.white,
         padding: 0,
         borderTopWidth: 0,
         borderBottomWidth: 0,
-        borderTopColor: Colors.white,
-        borderBottomColor: Colors.white,
-        borderRadius: 25,
-        marginTop: 10
+        borderRadius: 15,
+        marginVertical: 20,
+        marginHorizontal: 15,
     },
     searchBarContainer: {
         backgroundColor: Colors.greySoft,
@@ -24,5 +33,17 @@ export const styles = StyleSheet.create({
     },
     searchBarInput: {
         backgroundColor: Colors.greySoft,
+        fontSize: 15,
+    },
+    searchBarIcon: {
+        backgroundColor: Colors.yellow,
+        width: 35,
+        height: 35,
+        borderRadius: 15,
+    },
+    searchBarIconImage: {
+        width: 20,
+        height: 20,
+        marginLeft: 5
     }
 });

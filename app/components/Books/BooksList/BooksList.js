@@ -3,7 +3,6 @@ import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import Book from "../Book/Book";
-import Header from "../../Header/Header";
 import BookListSeparator from "./BooklistSeparator/BooklistSeparator";
 import { styles } from "./styles";
 import { Colors } from "../../../styles";
@@ -45,7 +44,6 @@ export default function BooksList() {
 
     return (
         <View style={styles.view}>
-            <Header>Bestsellers</Header>
             { booksList.length > 0
                 ?
                 <FlatList
@@ -54,6 +52,8 @@ export default function BooksList() {
                     keyExtractor={(item, index) => index.toString()}
                     ItemSeparatorComponent={BookListSeparator}
                     onEndReached={handleLoadMore}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     onEndReachedThreshold={0.5} // Esto indica a partir de cuando se va a ejecutar nuestra función (contando desde abajo (por ejemplo, antes de llegar al footer)
                     ListFooterComponent={
                         loading && (
