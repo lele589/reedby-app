@@ -23,12 +23,6 @@ export default function BookPlaceholder({ repeat = 1, animation, lineOneWidth, l
                 <PlaceholderLine width={lineThreeWidth} />
             </Placeholder>
         )
-
-        if (i < repeat) {
-            items.push(
-                <BookListSeparator key={'separator-' + i} styles={styles.separator} />
-            )
-        }
     }
 
     return (

@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
     view: {
         display: 'flex',
         alignItems: 'center',
-        paddingTop: 20,
     },
     noResultsImage: {
         height: 200,

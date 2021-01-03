@@ -73,12 +73,14 @@ export default function SearchResults({ search }) {
         <View style={styles.view}>
             { loading
                 ?
-                <BookPlaceholder
-                    repeat={3}
-                    lineOneWidth={70}
-                    lineTwoWidth={50}
-                    lineThreeWidth={30}
-                />
+                <View style={styles.bookPlaceholder}>
+                    <BookPlaceholder
+                        repeat={3}
+                        lineOneWidth={70}
+                        lineTwoWidth={50}
+                        lineThreeWidth={30}
+                    />
+                </View>
                 :
                 ( noResults
                     ?
@@ -90,9 +92,8 @@ export default function SearchResults({ search }) {
                             </View>
                             <FlatList
                                 data={results}
-                                renderItem={({ item }) => <Book book={item} navigation={navigation}/>}
+                                renderItem={({ item }) => <Book book={item} bookStyles={styles.book} navigation={navigation}/>}
                                 keyExtractor={(item, index) => index.toString()}
-                                ItemSeparatorComponent={BookListSeparator}
                                 //onEndReached={handleLoadMore}
                                 //onEndReachedThreshold={0.5} // Esto indica a partir de cuando se va a ejecutar nuestra función (contando desde abajo (por ejemplo, antes de llegar al footer)
                             />
