@@ -4,41 +4,39 @@ import { Colors } from "../../../styles";
 export const styles = StyleSheet.create({
     view: {
         flexDirection: 'row',
-        marginTop: 20,
-        marginBottom: 20
+        alignItems: 'center',
+        height: 130,
     },
     bookImageView: {
-        backgroundColor: 'white',
         width: '25%',
-        borderRadius: 5,
+        paddingLeft: 10,
+        borderRadius: 15,
         //ios
         shadowColor: Colors.greyDark,
         shadowOffset: {
             width: 0,
-            height: 4,
+            height: 0,
         },
         shadowOpacity: 0.32,
-        shadowRadius: 5.46,
+        shadowRadius: 5,
         //android
-        elevation: 9,
-        height: 140,
+        elevation: 15,
     },
     image: {
-        height: '100%',
         borderRadius: 5,
+        height: '100%',
     },
     bookInfoView: {
         width: '75%',
         paddingLeft: 15
     },
     title: {
-        marginTop: 10,
-        fontSize: 18,
-        lineHeight: 22,
+        fontSize: 17,
+        lineHeight: 20,
     },
     author: {
         color: Colors.grey,
-        fontSize: 15,
+        fontSize: 14,
         lineHeight: 22,
     },
     ratingView: {
@@ -50,9 +48,9 @@ export const styles = StyleSheet.create({
         marginRight: 5
     },
     ratingText: {
-        color: Colors.green,
+        color: Colors.grey,
         marginRight: 5,
-        fontSize: 15
+        fontSize: 13
     },
     ratingTextCount: {
         color: Colors.greyLight
@@ -61,7 +59,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginTop: 10,
     },
     tag: {
         alignSelf: 'flex-start',

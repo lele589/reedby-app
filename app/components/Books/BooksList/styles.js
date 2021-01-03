@@ -4,8 +4,6 @@ import { Colors } from "../../../styles";
 export const styles = StyleSheet.create({
     view: {
         height: '100%',
-        paddingLeft: 20,
-        paddingRight: 20,
         paddingTop: 40,
         overflow: 'hidden',
         borderRadius: 35
@@ -21,5 +19,9 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 10,
         color: Colors.green
+    },
+    book: {
+        paddingHorizontal: 15,
+        marginVertical: 20,
     }
 });

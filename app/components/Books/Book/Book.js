@@ -10,7 +10,7 @@ import Tag from "../../Tags/Tag/Tag";
 import { styles } from './styles';
 import { Colors } from "../../../styles";
 
-export default function Book({ book, navigation }) {
+export default function Book({ book, navigation, visibleTags, bookStyles }) {
 
     const { id } = book;
     const { title, authors, categories, imageLinks, ratingsCount, averageRating } = book['volumeInfo'];
@@ -26,8 +26,9 @@ export default function Book({ book, navigation }) {
     const goBookInfo = async () => {
         navigation.navigate("book-info", {
             id,
-            name: title,
-            subjects: finalSubjectList
+            thumb: thumb,
+            bookData: book['volumeInfo'],
+            subjects: finalSubjectList,
         });
     };
 
@@ -63,7 +64,7 @@ export default function Book({ book, navigation }) {
         <TouchableOpacity
             onPress={goBookInfo}
         >
-            <View style={styles.view}>
+            <View style={[styles.view, bookStyles]}>
                 <View style={styles.bookImageView}>
                     <Image
                         source={{ uri: thumb }}
@@ -75,7 +76,7 @@ export default function Book({ book, navigation }) {
                     {title &&
                         <TextCustom
                             weight="bold"
-                            numberOfLines={2}
+                            numberOfLines={1}
                             textStyles={styles.title}>
                                 {title}
                         </TextCustom>
@@ -96,25 +97,25 @@ export default function Book({ book, navigation }) {
                                 startingValue={averageRating}
                                 type='custom'
                                 tintColor={Colors.white}
-                                ratingColor={Colors.green}
-                                ratingBackgroundColor={Colors.greyLight2}
+                                ratingColor={Colors.yellow}
+                                ratingBackgroundColor={Colors.yellowLight}
                                 style={styles.rating} />
                             <TextCustom weight="bold" textStyles={styles.ratingText}>{averageRating}</TextCustom>
                             <TextCustom textStyles={styles.ratingTextCount}>({ratingsCount})</TextCustom>
                         </View>
                     }
-                    {finalSubjectList.length > 0 &&
-                        <View style={styles.tagView}>
-                            {finalSubjectList.map((subjectItem, key) =>
-                                key < 4 &&
-                               (<Tag
-                                    key={key}
-                                    tagStyles={styles.tag}
-                                    tagTitle={subjectItem}
-                                    numberOfLines={1}
-                                />)
-                            )}
-                        </View>
+                    {visibleTags && finalSubjectList.length > 0 &&
+                    <View style={styles.tagView}>
+                        {finalSubjectList.map((subjectItem, key) =>
+                            key < 4 &&
+                            (<Tag
+                                key={key}
+                                tagStyles={styles.tag}
+                                tagTitle={subjectItem}
+                                numberOfLines={1}
+                            />)
+                        )}
+                    </View>
                     }
                 </View>
             </View>

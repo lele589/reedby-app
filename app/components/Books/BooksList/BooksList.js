@@ -1,14 +1,15 @@
 import React, { useState, useCallback } from 'react';
-import { View, FlatList, ActivityIndicator } from 'react-native';
+import { View, FlatList, ActivityIndicator, Animated } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import Book from "../Book/Book";
 import TextCustom from "../../TextCustom/TextCustom";
-import BookListSeparator from "./BooklistSeparator/BooklistSeparator";
 import { styles } from "./styles";
 import { Colors } from "../../../styles";
 
-export default function BooksList() {
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
+export default function BooksList({ scrollY }) {
     // books+${actualSearch}&maxResults=${maxResults}&orderBy=${orderBy}&langRestrict=es
     const[booksList, setBooksList] = useState([]);
     const[loading, setLoading] = useState(false);
@@ -47,15 +48,18 @@ export default function BooksList() {
         <View style={styles.view}>
             { booksList.length > 0
                 ?
-                <FlatList
+                <AnimatedFlatList
                     data={booksList}
-                    renderItem={({ item }) => <Book book={item} navigation={navigation}/>}
+                    renderItem={({ item }) => <Book book={item} bookStyles={styles.book} navigation={navigation}/>}
                     keyExtractor={(item, index) => index.toString()}
-                    ItemSeparatorComponent={BookListSeparator}
                     onEndReached={handleLoadMore}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     onEndReachedThreshold={0.5} // Esto indica a partir de cuando se va a ejecutar nuestra función (contando desde abajo (por ejemplo, antes de llegar al footer)
+                    scrollEventThrottle={1}
+                    onScroll={Animated.event(
+                        [{nativeEvent: {contentOffset: {y: scrollY}}}],
+                    )}
                     ListFooterComponent={
                         loading && (
                             <ActivityIndicator
