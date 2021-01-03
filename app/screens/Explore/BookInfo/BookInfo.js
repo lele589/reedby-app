@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
 import Book from "../../../components/Books/Book/Book";
 import BookListSeparator from "../../../components/Books/BooksList/BooklistSeparator/BooklistSeparator";
 import BookDetails from "../../../components/Books/BookDetails/BookDetails";
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from "./styles";
 import { Colors } from "../../../styles";
 
@@ -37,7 +38,7 @@ export default function BookInfo({ navigation, route }) {
                 :
                 <View style={styles.loaderView}>
                     <ActivityIndicator size="large" color={Colors.green}/>
-                    <Text style={styles.loaderText}>Cargando...</Text>
+                    <TextCustom textStyles={styles.loaderText}>Cargando...</TextCustom>
                 </View>
             }
         </View>

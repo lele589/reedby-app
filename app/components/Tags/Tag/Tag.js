@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
+import TextCustom from "../../TextCustom/TextCustom";
 
 export default function Tag({ tagTitle, onPress, tagStyles, tagTextStyles }) {
 
@@ -12,7 +13,7 @@ export default function Tag({ tagTitle, onPress, tagStyles, tagTextStyles }) {
                 onPress={onPress}
                 style={[styles.tag, tagStyles]}
             >
-                <Text style={[styles.tagText, tagTextStyles]}>{tagTitle}</Text>
+                <TextCustom textStyles={[styles.tagText, tagTextStyles]}>{tagTitle}</TextCustom>
             </TouchableOpacity>)
     )
 };

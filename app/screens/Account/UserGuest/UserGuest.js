@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Button from "../../../components/Button/Button";
 
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from "./styles";
 
 export default function UserGuest() {
@@ -18,7 +19,7 @@ export default function UserGuest() {
                     style={ styles.image }
                 />
             </View>
-            <Text style={styles.text}>Descubre nuevos libros basados en tus preferencias, anota tus lecturas y comparte recomendaciones.</Text>
+            <TextCustom textStyles={styles.text}>Descubre nuevos libros basados en tus preferencias, anota tus lecturas y comparte recomendaciones.</TextCustom>
             <View style={ styles.btnsView }>
                 <Button
                     text="Acceder"

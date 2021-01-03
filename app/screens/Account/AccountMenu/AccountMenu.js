@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { FirebaseContext } from "../../../config/firebase";
 
@@ -8,6 +8,7 @@ import { createNickName } from "../../../utils/user";
 import Modal from "../../../components/Modal/Modal";
 import ChangeDisplayName from "../../../components/Account/ChangeDisplayName/ChangeDisplayName";
 import ChangePassword from "../../../components/Account/ChangePassword/ChangePassword";
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from './styles';
 
 export default function AccountMenu({ setReloadUserInfo }) {
@@ -46,7 +47,7 @@ export default function AccountMenu({ setReloadUserInfo }) {
                 }).catch(() => {
                     setShowModal(true);
                     setErrorMessage(true);
-                    setRenderModalText(<Text>No se ha podido abrir la aplicación de correo electrónico del teléfono</Text>);
+                    setRenderModalText(<TextCustom>No se ha podido abrir la aplicación de correo electrónico del teléfono</TextCustom>);
                 });
                 break;
             case 'pass':
@@ -66,7 +67,7 @@ export default function AccountMenu({ setReloadUserInfo }) {
 
     return (
         <View style={styles.view}>
-            <Text style={styles.mainTitle}>Cuenta</Text>
+            <TextCustom textStyles={styles.mainTitle}>Cuenta</TextCustom>
             { menuItems.map((item, key) => (
                 <ListItem
                     key={key}

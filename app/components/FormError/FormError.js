@@ -1,14 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
+import TextCustom from "../TextCustom/TextCustom";
 import { styles } from './styles'
 
 export default function FormError({ text }) {
     return (
         <View>
-            <Text
-                style={styles.text}
-            >{text}</Text>
+            <TextCustom textStyles={styles.text}>{text}</TextCustom>
         </View>
     )
 };

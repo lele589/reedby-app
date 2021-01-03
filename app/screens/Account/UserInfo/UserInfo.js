@@ -9,6 +9,7 @@ import { FirebaseContext } from "../../../config/firebase";
 import { createNickName } from "../../../utils/user";
 import defaultAvatar from '../../../../assets/img/avatar.png';
 import ModalLoader from "../../../components/Loaders/ModalLoader/ModalLoader";
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from './styles';
 
 export default function UserInfo() {
@@ -80,8 +81,8 @@ export default function UserInfo() {
                 onAccessoryPress={_editAvatar}
             />
             <View>
-                <Text style={styles.name}>{user.displayName || createNickName(user.email)}</Text>
-                <Text style={styles.bookshelf}>Colección de 45 libros (25 leídos)</Text>
+                <TextCustom textStyles={styles.name}>{user.displayName || createNickName(user.email)}</TextCustom>
+                <TextCustom textStyles={styles.bookshelf}>Colección de 45 libros (25 leídos)</TextCustom>
             </View>
             <ModalLoader isVisible={loading} text="Actualizando avatar..." />
         </View>

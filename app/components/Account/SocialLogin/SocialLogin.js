@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { SocialIcon } from "react-native-elements";
 
+import TextCustom from "../../TextCustom/TextCustom";
 import { styles } from './styles'
 
 export default function SocialLogin() {
     return (
         <View>
-            <Text style={styles.text}>O tambien puedes acceder con:</Text>
+            <TextCustom textStyles={styles.text}>O tambien puedes acceder con:</TextCustom>
             <View style={styles.btnsView}>
                 <SocialIcon
                     title='Facebook'

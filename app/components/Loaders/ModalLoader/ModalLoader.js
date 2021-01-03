@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { Overlay } from 'react-native-elements';
 
+import TextCustom from "../../TextCustom/TextCustom";
 import { styles } from './styles';
 
 export default function ModalLoader({ isVisible, text }) {
@@ -17,7 +18,7 @@ export default function ModalLoader({ isVisible, text }) {
                     size="large"
                     color="00a680"
                 />
-                { text && <Text style={ styles.text }>{ text }</Text> }
+                { text && <TextCustom textStyles={ styles.text }>{ text }</TextCustom> }
             </View>
         </Overlay>
     )

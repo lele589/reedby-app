@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Image } from 'react-native';
 
 import SocialLogin from "../../../components/Account/SocialLogin/SocialLogin";
 import RegisterForm from "../../../components/Account/RegisterForm/RegisterForm";
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from './styles'
 
 export default function Register() {
@@ -20,7 +21,7 @@ export default function Register() {
                         style={styles.logo}
                     />
                 </View>
-                <Text style={styles.title}>Nueva cuenta</Text>
+                <TextCustom textStyles={styles.title}>Nueva cuenta</TextCustom>
                 <RegisterForm/>
                 <SocialLogin/>
             </View>

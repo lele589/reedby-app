@@ -5,6 +5,7 @@ import { FirebaseContext } from "../../../config/firebase";
 
 import { sendMailTo, getAppLink, onShare } from "../../../utils/share";
 import Modal from "../../../components/Modal/Modal";
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from './styles';
 
 export default function SettingsMenu() {
@@ -34,7 +35,7 @@ export default function SettingsMenu() {
                 }).catch(() => {
                     setShowModal(true);
                     setErrorMessage(true);
-                    setRenderModalText(<Text>No se ha podido abrir la aplicación de correo electrónico del teléfono</Text>);
+                    setRenderModalText(<TextCustom>No se ha podido abrir la aplicación de correo electrónico del teléfono</TextCustom>);
                 });
                 break;
             case 'signOut':
@@ -49,7 +50,7 @@ export default function SettingsMenu() {
 
     return (
         <View>
-            <Text style={styles.mainTitle}>Ajustes</Text>
+            <TextCustom textStyles={styles.mainTitle}>Ajustes</TextCustom>
             { menuItems.map((item, key) => (
                 <ListItem
                     key={key}

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, View, Text } from "react-native";
+import { Image, View } from "react-native";
 import { Overlay } from 'react-native-elements'
 import PropTypes from 'prop-types';
 
+import TextCustom from "../TextCustom/TextCustom";
 import { styles } from "./styles";
 
 export default function Modal({ isVisible, setIsVisible, children, errorMessage }) {
@@ -20,14 +21,14 @@ export default function Modal({ isVisible, setIsVisible, children, errorMessage 
                             resizeMode="contain"
                             style={styles.errorIcon}
                         />
-                        <Text style={styles.errorTitle}>
+                        <TextCustom textStyles={styles.errorTitle}>
                             Error
-                        </Text>
+                        </TextCustom>
                     </View>
                     <View style={[styles.errorMessageContainer]}>
-                        <Text style={styles.errorText}>
+                        <TextCustom textStyles={styles.errorText}>
                             {children}
-                        </Text>
+                        </TextCustom>
                     </View>
                 </View>)
         } else {

@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Image } from 'react-native';
 
 import SocialLogin from "../../../components/Account/SocialLogin/SocialLogin";
 import LoginForm from "../../../components/Account/LoginForm/LoginForm";
+import TextCustom from "../../../components/TextCustom/TextCustom";
 import { styles } from "./styles";
 
 export default function Login() {
@@ -20,7 +21,7 @@ export default function Login() {
                         style={styles.logo}
                     />
                 </View>
-                <Text style={styles.title}>Accede</Text>
+                <TextCustom textStyles={styles.title}>Accede</TextCustom>
                 <LoginForm/>
                 <SocialLogin/>
             </View>

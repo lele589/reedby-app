@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Icon } from "react-native-elements";
 import PropTypes from 'prop-types';
 
+import TextCustom from "../TextCustom/TextCustom";
 import { Colors } from "../../styles";
 import { styles } from "./styles";
 
@@ -34,9 +35,9 @@ export default function Button({ text, type, buttonStyle, textStyle, onPress, ic
                         name={iconName}
                         iconStyle={[styles.iconCommon, styles[iconStyleType], iconStyle]}
                     />),
-                    <Text style={[styles[textStyleType], textStyle]}>
+                    <TextCustom textStyles={[styles[textStyleType], textStyle]}>
                         {text}
-                    </Text>
+                    </TextCustom>
             );
         }
         return child;

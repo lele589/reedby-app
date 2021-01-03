@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import Book from "../Book/Book";
+import TextCustom from "../../TextCustom/TextCustom";
 import BookListSeparator from "./BooklistSeparator/BooklistSeparator";
 import { styles } from "./styles";
 import { Colors } from "../../../styles";
@@ -66,7 +67,7 @@ export default function BooksList() {
              :
                 <View style={styles.loaderView}>
                     <ActivityIndicator size="large" color={Colors.green}/>
-                    <Text style={styles.loaderText}>Cargando...</Text>
+                    <TextCustom textStyles={styles.loaderText}>Cargando...</TextCustom>
                 </View>
             }
         </View>
