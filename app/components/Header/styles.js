@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
     },
     moreTextView: {
         alignSelf: 'flex-start'
