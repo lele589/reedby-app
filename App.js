@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Platform, StatusBar } from "react-native";
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import Navigation from "./app/navigations/Navigation";
 import useAuthentication from "./app/hooks/useAuthentication";
 import firebase, { FirebaseContext } from './app/config/firebase';

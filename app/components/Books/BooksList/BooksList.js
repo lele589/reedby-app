@@ -59,6 +59,7 @@ export default function BooksList({ scrollY }) {
                     scrollEventThrottle={1}
                     onScroll={Animated.event(
                         [{nativeEvent: {contentOffset: {y: scrollY}}}],
+                        {useNativeDriver: false}
                     )}
                     ListFooterComponent={
                         loading && (
