@@ -8,10 +8,21 @@ export const styles = StyleSheet.create({
         marginRight: 5,
         alignItems: 'center',
         backgroundColor: Colors.brown,
-        borderRadius: 15,
+        borderRadius: 10,
         paddingHorizontal: 15,
-        paddingVertical: 10,
+        paddingVertical: 5,
         alignSelf: 'flex-start',
+    },
+    subjectActive: {
+        backgroundColor: Colors.yellow,
+    },
+    subjectText: {
+        color: Colors.black,
+        fontSize: 13,
+    },
+    overflow: {
+        borderRadius: 15,
+        paddingVertical: 10,
         //ios
         shadowColor: Colors.greyDark,
         shadowOffset: {
@@ -23,10 +34,8 @@ export const styles = StyleSheet.create({
         //android
         elevation: 9,
     },
-    subjectActive: {
-        backgroundColor: Colors.yellow,
-    },
-    subjectText: {
+    overflowText: {
         color: Colors.white,
+        fontSize: 14,
     }
 });

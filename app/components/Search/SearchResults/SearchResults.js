@@ -88,7 +88,7 @@ export default function SearchResults({ search }) {
                     :
                         <View>
                             <View style={styles.resultsNum}>
-                                <TagColor text={totalItems + ' Resultados'} active />
+                                <TagColor text={totalItems + ' Resultados'} active overflow />
                             </View>
                             <FlatList
                                 data={results}

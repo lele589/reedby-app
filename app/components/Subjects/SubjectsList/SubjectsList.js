@@ -28,7 +28,7 @@ export default function SubjectsList({ initial }) {
                 &&
                 <FlatList
                     data={subjectsList}
-                    renderItem={({ item }) => <TagColor active={initial === item.name && true} item={item}/>}
+                    renderItem={({ item }) => <TagColor active={initial === item.name && true} item={item} overflow/>}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
