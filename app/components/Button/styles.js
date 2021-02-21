@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         height: 45
     },
     btnMain: {
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.yellow,
     },
     btnSecondary: {
         borderColor: Colors.green,

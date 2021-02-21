@@ -44,7 +44,7 @@ export default function Button({ text, type, buttonStyle, textStyle, onPress, ic
     };
 
     return (
-        <TouchableOpacity onPress={onPress}  style={[styles.btnCommon, type, buttonStyle]}>
+        <TouchableOpacity onPress={onPress}  style={[styles.btnCommon, styles[type], buttonStyle]}>
             {_renderChildren()}
         </TouchableOpacity>
     )
