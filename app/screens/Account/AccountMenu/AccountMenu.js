@@ -71,11 +71,14 @@ export default function AccountMenu({ setReloadUserInfo }) {
             { menuItems.map((item, key) => (
                 <ListItem
                     key={key}
-                    title={_getItemTitle(item)}
-                    subtitle={item.subtitle}
-                    subtitleStyle={styles.subtitle}
                     onPress={item.onPress}
-                />
+                >
+                    <ListItem.Content>
+                        <ListItem.Title>{_getItemTitle(item)}</ListItem.Title>
+                        <ListItem.Subtitle style={styles.subtitle}>{item.subtitle}</ListItem.Subtitle>
+                    </ListItem.Content>
+                    <ListItem.Chevron />
+                </ListItem>
             ))}
             { renderModalText && (
                 <Modal isVisible={showModal} setIsVisible={setShowModal} errorMessage={errorMessage}>

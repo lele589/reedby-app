@@ -9,10 +9,9 @@ export const styles = StyleSheet.create({
         paddingTop: 10,
         paddingLeft: 10,
         paddingRight: 20,
-        backgroundColor: Colors.white,
-        color: Colors.green,
+        color: Colors.yellow,
         fontWeight: '600',
-        fontSize: 17
+        fontSize: 22
     },
     subtitle: {
         color: Colors.grey

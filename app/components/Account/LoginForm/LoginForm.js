@@ -42,7 +42,6 @@ export default function LoginForm() {
         <View style={styles.formView}>
             <Input
                 autoCapitalize="none"
-                style={{ color: 'red'}}
                 placeholder="Correo electrónico"
                 containerStyle={ styles.inputContainer }
                 inputStyle={ styles.input }
@@ -50,7 +49,7 @@ export default function LoginForm() {
                 clearButtonMode="always"
                 importantForAutofill="auto"
                 keyboardType="email-address"
-                placeholderTextColor="#666"
+                placeholderTextColor={ styles.placeholder.color }
                 textContentType="emailAddress"
                 leftIcon={
                     <Icon
@@ -71,7 +70,7 @@ export default function LoginForm() {
                 secureTextEntry={!showPass}
                 clearButtonMode="always"
                 importantForAutofill="auto"
-                placeholderTextColor="#666"
+                placeholderTextColor={ styles.placeholder.color }
                 textContentType="password"
                 leftIcon={
                     <Icon

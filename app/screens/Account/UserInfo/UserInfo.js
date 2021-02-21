@@ -74,15 +74,15 @@ export default function UserInfo() {
         <View style={styles.view}>
             <Avatar
                 containerStyle={styles.avatarContainer}
-                rounded
-                size="large"
+                avatarStyle={styles.avatar}
+                size="xlarge"
                 source={user.photoURL ? { uri: user.photoURL} : defaultAvatar}
                 showAccessory
                 onAccessoryPress={_editAvatar}
             />
             <View>
                 <TextCustom textStyles={styles.name}>{user.displayName || createNickName(user.email)}</TextCustom>
-                <TextCustom textStyles={styles.bookshelf}>Colección de 45 libros (25 leídos)</TextCustom>
+                <TextCustom textStyles={styles.bookshelf}>25/45 libros leídos</TextCustom>
             </View>
             <ModalLoader isVisible={loading} text="Actualizando avatar..." />
         </View>

@@ -2,9 +2,6 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../../styles";
 
 export const styles = StyleSheet.create({
-    scrollView: {
-        backgroundColor: Colors.greyDark,
-    },
     title: {
         color: Colors.white,
         fontSize: 23,

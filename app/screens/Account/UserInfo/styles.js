@@ -8,20 +8,37 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor: Colors.greyDark,
     },
     avatarContainer: {
-        marginRight: 20,
-        backgroundColor: Colors.green
+        marginRight: 15,
+        position: 'relative',
+        top: 20,
+        borderWidth: 5,
+        borderRadius: 40,
+        borderColor: Colors.yellow,
+        backgroundColor: Colors.greenLight,
+        //ios
+        shadowColor: Colors.greyDark,
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5,
+        //android
+        elevation: 15,
+    },
+    avatar: {
+        borderRadius: 35
     },
     name: {
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: '600',
         color: Colors.white,
         marginBottom: 5
     },
     bookshelf: {
-        fontSize: 15,
-        color: Colors.greyLight,
+        fontSize: 16,
+        color: Colors.greyLight2,
     }
 });

@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
+import { Colors } from "../../../styles"
 
 export const styles = StyleSheet.create({
     scrollView: {
-        marginLeft: 30,
-        marginRight: 30,
+        backgroundColor: Colors.white,
     },
     imageView: {
         justifyContent: 'center',
@@ -18,18 +18,11 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 40,
         marginTop: 20,
-        lineHeight: 23
-    },
-    btnCommon: {
-        width: '85%',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 10,
-        borderRadius: 25,
-        height: 45
+        lineHeight: 23,
+        paddingHorizontal: 20
     },
     btnsView: {
+        marginHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { Text, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { View } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
 import { FirebaseContext } from "../../../config/firebase";
 
 import { sendMailTo, getAppLink, onShare } from "../../../utils/share";
@@ -54,11 +54,15 @@ export default function SettingsMenu() {
             { menuItems.map((item, key) => (
                 <ListItem
                     key={key}
-                    title={item.title}
-                    leftIcon={{ name: item.leftIconName, type: 'simple-line-icon', color: '#ccc' }}
                     chevron
                     onPress={item.onPress}
-                />
+                >
+                    <Icon type="simple-line-icon" name={item.leftIconName} color='#ccc'/>
+                    <ListItem.Content>
+                        <ListItem.Title>{item.title}</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.Chevron />
+                </ListItem>
             ))}
             { renderModalText && (
                 <Modal isVisible={showModal} setIsVisible={setShowModal} errorMessage={errorMessage}>
@@ -67,7 +71,7 @@ export default function SettingsMenu() {
             )}
         </View>
     )
-};
+}
 
 const _generateMenu = (selectedItem) => {
     return [

@@ -23,9 +23,9 @@ export const styles = StyleSheet.create({
         color: Colors.green,
     },
     placeholder: {
-        color: Colors.grey
+        color: Colors.greyLight2
     },
     error: {
-        color: Colors.red,
+        color: Colors.yellow,
     }
 });

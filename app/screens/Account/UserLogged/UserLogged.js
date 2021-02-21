@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { FirebaseContext } from "../../../config/firebase";
 
 import UserInfo from "../UserInfo/UserInfo";
@@ -23,7 +23,7 @@ export default function UserLogged() {
     }, [reloadUserInfo]);
 
     return (
-        <ScrollView
+        <View
             contentContainerStyle={styles.contentContainer}
             alwaysBounceVertical={true}
             automaticallyAdjustContentInsets={true}
@@ -32,8 +32,10 @@ export default function UserLogged() {
             stickyHeaderIndices={[0]}
         >
             {userData && <UserInfo setReloadUserInfo={setReloadUserInfo}/> }
-            {userData && <AccountMenu setReloadUserInfo={setReloadUserInfo}/> }
-            <SettingsMenu />
-        </ScrollView>
+            <View style={styles.menuContainer}>
+                {userData && <AccountMenu setReloadUserInfo={setReloadUserInfo}/> }
+                <SettingsMenu />
+            </View>
+        </View>
     )
 };

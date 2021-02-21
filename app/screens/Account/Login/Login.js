@@ -10,7 +10,6 @@ export default function Login() {
     return (
         <ScrollView
             centerContent={true}
-            style={styles.scrollView}
             contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
         >
             <View>
